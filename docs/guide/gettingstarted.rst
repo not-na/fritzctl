@@ -2,8 +2,17 @@
 Getting Started with ``fritzctl``
 =================================
 
-Installation
-------------
+Installation via pip
+--------------------
+
+The recommended way of installing ``fritzctl`` is via ``pip``\ ::
+   
+   $ pip install fritzctl
+   
+If you do not have pip installed, you can find how to install it in the `documentation <https://pip.pypa.io/en/stable/installing/>`_\ .
+
+Manual Installation
+-------------------
 
 Due to its complexity, ``fritzctl`` needs multiple steps to be installed successfully.
 

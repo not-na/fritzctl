@@ -49,9 +49,9 @@ setup(name='fritzctl',
       version="1.0.0a1",
       description="Object oriented TR64 FRITZ!Box Client Library",
       long_description=longdesc,
-      author="AVM",
-      author_email="Entwicklungssupport@avm.de",
-      url="https://pypi.python.org/",
+      author="notna",
+      author_email="notna@apparat.org",
+      url="https://pypi.python.org/pypi/fritzctl",
       packages=['fritzctl'],
       requires=["requests","simpletr64",],
       provides=["fritzctl"],
@@ -64,19 +64,24 @@ setup(name='fritzctl',
         
         "Intended Audience :: Developers",
         
-        #"License :: OSI Approved",
-        #"License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
-        # TODO: clarify license status
+        "License :: OSI Approved",
+        "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
         
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX :: Linux",
+        "Operating System :: OS Independent",
         
         "Programming Language :: Python",
         "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2 :: Only",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: System",
+        "Topic :: System :: Networking",
+        "Topic :: System :: Networking :: Monitoring",
+        
         ],
       )

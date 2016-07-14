@@ -1,0 +1,2 @@
+simpletr64
+requests

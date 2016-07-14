@@ -106,3 +106,5 @@ After you have triple-checked that everything works, you can simply run this com
 This command has been tested under Ubuntu 16.04 and will need to be modified to work under windows.
 
 If the process fails during the upload step, simply re-run the command without the register step.
+
+After having released, you should try installing the package on another machine that does not have fritzctl installed, just to see if you missed an added dependency or have another bug that only shows itself on another system.
