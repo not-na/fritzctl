@@ -1,6 +1,6 @@
 
 ``fritzctl`` - Python Client Library for the AVM TR64 API
-=======================================================
+=========================================================
 
 .. image:: https://readthedocs.org/projects/fritzctl/badge/?version=latest
    :target: http://fritzctl.readthedocs.io/en/latest/?badge=latest
