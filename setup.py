@@ -48,7 +48,7 @@ except IOError:
     longdesc = "Object oriented TR64 FRITZ!Box Client Library"
 
 setup(name='fritzctl',
-      version="1.0.0a1",
+      version="1.0.0a2",
       description="Object oriented TR64 FRITZ!Box Client Library",
       long_description=longdesc,
       author="notna",
