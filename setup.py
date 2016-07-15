@@ -27,8 +27,10 @@
 # With setuptools installed:
 # sudo python setup.py install sdist bdist bdist_wheel register upload
 
-#from distutils.core import setup
-from setuptools import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 # Fix for very old python versions from https://docs.python.org/2/distutils/setupscript.html#additional-meta-data
 # patch distutils if it can't cope with the "classifiers" or
@@ -52,7 +54,7 @@ setup(name='fritzctl',
       author="notna",
       author_email="notna@apparat.org",
       url="https://pypi.python.org/pypi/fritzctl",
-      packages=['fritzctl'],
+      packages=['fritzctl',"fritzctl.ooapi"],
       requires=["requests","simpletr64",],
       provides=["fritzctl"],
       classifiers=[

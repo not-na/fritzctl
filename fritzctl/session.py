@@ -27,7 +27,9 @@ __all__ = ["NAME_TO_URN","Session"]
 import simpletr64
 
 from . import dynapi
-from .ooapi import OO_APIS
+from . import ooapi
+
+OO_APIS = ooapi.OO_APIS
 
 NAME_TO_URN = {
     # AVM APIs

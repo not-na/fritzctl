@@ -89,7 +89,7 @@ class API_avm_homeauto(base.API_base):
         :rtype: List of instances of :py:class:`HomeautoDevice()`\ .
         :raises AssertionError: if the supplied limit is invalid, e.g. not an integer or less than -1
         """
-        assert isinstance(limit,int) and index>=-1
+        assert isinstance(limit,int)
         out = []
         i = 0
         while i!=limit:
