@@ -19,11 +19,11 @@ Due to its complexity, ``fritzctl`` needs multiple steps to be installed success
 Requirements
 ^^^^^^^^^^^^
 
-The :py:mod:`fritzctl` module needs the latest Python 2.7.x installed, see the `Official Python Website <https://www.python.org/downloads/>`_ and select the file appropriate for your system.
+The :py:mod:`fritzctl` module needs the latest Python 3.x installed, see the `Official Python Website <https://www.python.org/downloads/>`_ and select the file appropriate for your system.
 
 .. note::
    
-   This module currently does not work with Python 3.x, so be sure to click on Download Python 2.7.x.
+   This module has been developed with Python 2.7, but should also work with Python 3.7+.
 
 In addition, you will also need to install both the :py:mod:`requests` and :py:mod:`simpletr64` modules.
 See `Requests <http://docs.python-requests.org/en/master/user/install/#install>`_ for how to install requests and `simpletr64 <http://bpannier.github.io/simpletr64/html/install.html#install>`_ for how to install lxml.

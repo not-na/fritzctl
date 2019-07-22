@@ -58,7 +58,7 @@ setup(name='fritzctl',
       install_requires=["requests", "simpletr64",],
       provides=["fritzctl"],
       classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
 
         "Environment :: MacOS X",
         "Environment :: Win32 (MS Windows)",
@@ -76,13 +76,14 @@ setup(name='fritzctl',
 
         "Programming Language :: Python",
         "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2 :: Only",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
 
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: System",
         "Topic :: System :: Networking",
         "Topic :: System :: Networking :: Monitoring",
+        "Topic :: Home Automation",
         ],
       )
