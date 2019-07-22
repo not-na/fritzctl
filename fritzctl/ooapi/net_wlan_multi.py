@@ -22,7 +22,7 @@
 #  
 #  
 
-import base
+from . import base
 
 KEYLONG = {
     "wep0":"NewWEPKey0",
