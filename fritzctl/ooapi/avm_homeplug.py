@@ -22,7 +22,7 @@
 #  
 #  
 
-import base
+from . import base
 
 class API_avm_homeplug(base.API_base):
     """

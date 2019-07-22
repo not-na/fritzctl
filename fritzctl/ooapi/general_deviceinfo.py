@@ -26,7 +26,7 @@ import re
 
 _provisioningpattern = re.compile(r"[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3}")
 
-import base
+from . import base
 
 class API_general_deviceinfo(base.API_base):
     """

@@ -25,7 +25,7 @@
 import requests
 from requests.auth import HTTPDigestAuth
 
-import base
+from . import base
 
 class API_general_deviceconfig(base.API_base):
     """

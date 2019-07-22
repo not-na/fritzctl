@@ -28,4 +28,4 @@ This package automatically imports the :py:mod:`session <fritzctl.session>` modu
 with ``from ... import *``\ , this means that you can access e.g. :py:class:`fritzctl.session.Session()` as :py:class:`fritzctl.Session()`\ .
 """
 
-from session import *
+from .session import *

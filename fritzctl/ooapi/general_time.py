@@ -22,7 +22,7 @@
 #  
 #  
 
-import base
+from . import base
 
 class API_general_time(base.API_base):
     """

@@ -24,7 +24,7 @@
 
 import sys
 
-import base
+from . import base
 
 STATE2SwStateEnum = {
     True:"ON",
