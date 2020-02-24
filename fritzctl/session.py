@@ -152,6 +152,7 @@ class Session(object):
     :param str pwd: Optional Password for authentification
     :param int port: Port to use when connecting, defaults to ``49000``
     :param bool authcheck: If the credentials should be checked, simply requests the ``general_deviceinfo`` API.
+    :param float timeout: Timeout for requests
     
     Instance Variables:
     
@@ -161,7 +162,7 @@ class Session(object):
     :ivar device: :py:class:`simpletr64.DeviceTR64()` Instance used for managing authentification
     :ivar urns: List of URNs found on the server, can be used for debugging
     """
-    def __init__(self,server=None,user=None,pwd=None,port=49000,authcheck=True):
+    def __init__(self, server=None, user=None, pwd=None, port=49000, authcheck=True, timeout=2.0):
         if server is None:
             raise NotImplementedError("Server search is currently not implemented")
         else:
@@ -169,6 +170,7 @@ class Session(object):
         
         self.user = user if user is not None else ""
         self.pwd = pwd if pwd is not None else ""
+        self.timeout = timeout
         self.device = simpletr64.DeviceTR64(server,port=port)
         self.device.username = self.user
         self.device.password = self.pwd
@@ -227,4 +229,6 @@ class Session(object):
         
         This method simply passes through all parameters to the internal :py:class:`simpletr64.DeviceTR64()` instance.
         """
+        if 'timeout' not in kwargs:
+            kwargs['timeout'] = self.timeout
         return self.device.execute(*args,**kwargs)
