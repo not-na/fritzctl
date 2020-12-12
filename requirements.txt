@@ -1,2 +1,2 @@
-simpletr64
+simpletr64==1.0.6
 requests

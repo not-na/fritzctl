@@ -116,7 +116,7 @@ Now that we have the :py:class:`HomeautoDevice() <fritzctl.ooapi.avm_homeauto.Ho
    # If you get something different, try the above section again but with the zero replaced by a one instead
    >>> mydevice.name # Can be changed in the userinterface, so may differ
    "FRITZ!Powerline 546E"
-   >>> mydevice.ain # Will be different but in the same format
+   >>> mydevice.ain # Will be different, depending on Fritz!OS and Device
    "12:34:56:78:90:AB"
 
 Seems that we got the right device, now we can check what features it has::
@@ -156,7 +156,11 @@ After we have all these different objects and flags, we can now safely toggle th
 You can also switch the device directly from the API::
    
    >>> api.switchByAIN("12:34:56:78:90:AB",True)
-   
+
+
+Note that switching will not work if the Device has been locked in the Fritz!Box Web Interface,
+since the Fritz!Box treats this library like an App.
+There is currently no way to switch a locked switch using just the API.
 
 Energy Measurements
 ^^^^^^^^^^^^^^^^^^^

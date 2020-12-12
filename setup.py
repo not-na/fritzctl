@@ -3,7 +3,7 @@
 #
 #  setup.py
 #
-#  Copyright 2016 notna <notna@apparat.org>
+#  Copyright 2016-2020 fritzctl Contributors
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -32,15 +32,6 @@ try:
 except ImportError:
     from distutils.core import setup
 
-# Fix for very old python versions from https://docs.python.org/2/distutils/setupscript.html#additional-meta-data
-# patch distutils if it can't cope with the "classifiers" or
-# "download_url" keywords
-from sys import version_info
-if version_info < (2, 2, 3):
-    from distutils.dist import DistributionMetadata
-    DistributionMetadata.classifiers = None
-    DistributionMetadata.download_url = None
-
 try:
     longdesc = open("README.txt", "r").read()
 except IOError:
@@ -48,14 +39,14 @@ except IOError:
     longdesc = "Object oriented TR64 FRITZ!Box Client Library"
 
 setup(name='fritzctl',
-      version="1.0.0a3",
+      version="1.1.0",
       description="Object oriented TR64 FRITZ!Box Client Library",
       long_description=longdesc,
       author="notna",
       author_email="notna@apparat.org",
       url="https://pypi.python.org/pypi/fritzctl",
       packages=['fritzctl', "fritzctl.ooapi"],
-      install_requires=["requests", "simpletr64",],
+      install_requires=["requests", "simpletr64"],
       provides=["fritzctl"],
       classifiers=[
         "Development Status :: 5 - Production/Stable",

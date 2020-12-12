@@ -3,7 +3,7 @@
 #
 #  session.py
 #  
-#  Copyright 2016 notna <notna@apparat.org>
+#  Copyright 2016-2020 fritzctl Contributors>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -46,7 +46,9 @@ NAME_TO_URN = {
     "avm_webdavclient":"urn:dslforum-org:service:X_AVM-DE_WebDAVClient:1",      # Priority: medium-low
     "avm_homeplug":"urn:dslforum-org:service:X_AVM-DE_Homeplug:1",              # OO Done -> fritzctl.ooapi.avm_homeplug.API_avm_homeplug
     "avm_tam":"urn:dslforum-org:service:X_AVM-DE_TAM:1",                        # Priority: low
-    
+    "avm_auth": "urn:dslforum-org:service:X_AVM-DE_Auth:1",
+    "avm_hostfilter": "urn:dslforum-org:service:X_AVM-DE_HostFilter:1",
+
     # General Purpose APIs
     
     "general_time":"urn:dslforum-org:service:Time:1",                           # OO Done -> fritzctl.ooapi.general_time.API_general_time
@@ -72,8 +74,6 @@ NAME_TO_URN = {
     "net_wlan_2.4ghz":"urn:dslforum-org:service:WLANConfiguration:1",           # OO Done -> fritzctl.ooapi.net_wlan_multi.API_net_wlan_multi
     "net_wlan_2nd":"urn:dslforum-org:service:WLANConfiguration:2",              # OO Done -> fritzctl.ooapi.net_wlan_multi.API_net_wlan_multi
     "net_wlan_3rd":"urn:dslforum-org:service:WLANConfiguration:3",              # OO Done -> fritzctl.ooapi.net_wlan_multi.API_net_wlan_multi
-    # TODO: add the rest of the URNs to this list
-    
     }
 """
 Allows for conversion between user-friendly names and internal Service Type URNs.
@@ -105,6 +105,8 @@ avm_filelinks            ``urn:dslforum-org:service:X_AVM-DE_Filelinks:1``      
 avm_webdavclient         ``urn:dslforum-org:service:X_AVM-DE_WebDAVClient:1``    No
 avm_homeplug             ``urn:dslforum-org:service:X_AVM-DE_Homeplug:1``        Yes
 avm_tam                  ``urn:dslforum-org:service:X_AVM-DE_TAM:1``             No
+avm_auth                 ``urn:dslforum-org:service:X_AVM-DE_Auth:1``            No
+avm_hostfilter           ``urn:dslforum-org:service:X_AVM-DE_HostFilter:1``      No
 general_time             ``urn:dslforum-org:service:Time:1``                     Yes
 general_deviceinfo       ``urn:dslforum-org:service:DeviceInfo:1``               Yes
 general_deviceconfig     ``urn:dslforum-org:service:DeviceConfig:1``             Yes

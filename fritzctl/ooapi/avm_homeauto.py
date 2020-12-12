@@ -3,7 +3,7 @@
 #
 #  avm_homeauto.py
 #  
-#  Copyright 2016 notna <notna@apparat.org>
+#  Copyright 2016-2020 fritzctl Contributors>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -137,6 +137,7 @@ class API_avm_homeauto(base.API_base):
         """
         self.dynapi.SetSwitch(NewAIN=ain,NewSwitchState=STATE2SwStateEnum[state])
 
+
 class HomeautoDevice(object):
     """
     Generic Device class representing any device queryable via the TR64 Homeauto API.
@@ -216,7 +217,7 @@ class HomeautoDevice(object):
         self.fwversion = data["NewFirmwareVersion"]
         self.manufacturer = data["NewManufacturer"]
         self.productname = data["NewProductName"]
-        self.name = data["NewDeviceName"]
+        self._name = data["NewDeviceName"]
         self.present = PresentEnum2INT[data["NewPresent"]]
         # Energy/Multimeter
         self.energy_flag = data["NewMultimeterIsEnabled"]=="ENABLED"
@@ -276,4 +277,23 @@ class HomeautoDevice(object):
     @switch_state.setter
     def switch_state(self,value):
         self.api.switchByAIN(self.ain,value)
+        self.reloadData()
+
+    @property
+    def name(self):
+        """
+        Property used for getting and setting the name of the device.
+
+        The value returned by the getter is only updated when :py:meth:`reloadData()` is called.
+
+        The setter immediately sets the name and refreshes the data.
+
+        The device name should be between 1 and 79 characters long according to the documentation,
+        though this is not checked in the library.
+        """
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self.api.dynapi.SetDeviceName(NewAIN=self.ain, NewDeviceName=value)
         self.reloadData()

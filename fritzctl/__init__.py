@@ -3,7 +3,7 @@
 #
 #  __init__.py
 #  
-#  Copyright 2016 notna <notna@apparat.org>
+#  Copyright 2016-2020 fritzctl Contributors>
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@
 #  
 #  
 """
-Root module for fritzctl containing the :py:mod:`fritzctl.session`\ , :py:mod:`fritzctl.dynapi` and :py:mod:`fritzctl.ooapi` modules and packages.
+Root module for fritzctl containing the :py:mod:`fritzctl.session`\\ , :py:mod:`fritzctl.dynapi` and :py:mod:`fritzctl.ooapi` modules and packages.
 
 This package automatically imports the :py:mod:`session <fritzctl.session>` module
-with ``from ... import *``\ , this means that you can access e.g. :py:class:`fritzctl.session.Session()` as :py:class:`fritzctl.Session()`\ .
+with ``from ... import *``\\ , this means that you can access e.g. :py:class:`fritzctl.session.Session()` as :py:class:`fritzctl.Session()`\\ .
 """
 
 from .session import *
