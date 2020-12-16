@@ -3,7 +3,7 @@
 #
 #  session.py
 #  
-#  Copyright 2016-2020 fritzctl Contributors>
+#  Copyright 2016-2020 fritzctl Contributors
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -154,7 +154,8 @@ class Session(object):
     :param str pwd: Optional Password for authentification
     :param int port: Port to use when connecting, defaults to ``49000``
     :param bool authcheck: If the credentials should be checked, simply requests the ``general_deviceinfo`` API.
-    :param float timeout: Timeout for requests
+    :param float timeout: Timeout for all TR64 requests
+    :param float authcheck_method: Method to use for authcheck, either ``deviceinfo`` (the default) or ``smarthome``
     
     Instance Variables:
     
@@ -164,7 +165,14 @@ class Session(object):
     :ivar device: :py:class:`simpletr64.DeviceTR64()` Instance used for managing authentification
     :ivar urns: List of URNs found on the server, can be used for debugging
     """
-    def __init__(self, server=None, user=None, pwd=None, port=49000, authcheck=True, timeout=2.0):
+    def __init__(self,
+                 server=None,
+                 user=None, pwd=None,
+                 port=49000,
+                 authcheck=True,
+                 timeout=2.0,
+                 authcheck_method="deviceinfo",
+                 ):
         if server is None:
             raise NotImplementedError("Server search is currently not implemented")
         else:
@@ -173,17 +181,19 @@ class Session(object):
         self.user = user if user is not None else ""
         self.pwd = pwd if pwd is not None else ""
         self.timeout = timeout
-        self.device = simpletr64.DeviceTR64(server,port=port)
+
+        self.device = simpletr64.DeviceTR64(server, port=port)
         self.device.username = self.user
         self.device.password = self.pwd
-        self.device.loadDeviceDefinitions("http://"+self.server+":"+str(self.device.port)+"/tr64desc.xml")
+
+        self.device.loadDeviceDefinitions("http://"+self.server+":"+str(self.device.port)+"/tr64desc.xml", timeout=timeout)
         self.device.loadSCPD()
         self.urns = self.device.deviceSCPD.keys()
+
         if authcheck:
-            try:
-                self.getOOAPI("general_deviceinfo").getDeviceInfo()
-            except Exception:
-                raise ValueError("Invalid Credentials for user %s!"%user)
+            if not self.do_authcheck(authcheck_method):
+                raise ValueError("Invalid Credentials for user %s, ensure they have the correct permissions!" % user)
+
     def getAPI(self,name):
         """
         Requests an API object by either URN or user-friendly name.
@@ -203,6 +213,7 @@ class Session(object):
                 raise ValueError("Invalid Name!")
             urn = NAME_TO_URN[name]
         return dynapi.DynamicAPI(self,urn)
+
     def getOOAPI(self,name):
         """
         Requests an Object-Oriented API by either URN or user-friendly name.
@@ -234,3 +245,20 @@ class Session(object):
         if 'timeout' not in kwargs:
             kwargs['timeout'] = self.timeout
         return self.device.execute(*args,**kwargs)
+
+    def do_authcheck(self, method):
+        # TODO: allow for printing of check-failing error
+        if method == "deviceinfo":
+            try:
+                self.getOOAPI("general_deviceinfo").getDeviceInfo()
+            except Exception:
+                return False
+        elif method == "smarthome":
+            try:
+                self.getOOAPI("avm_homeauto").getDeviceList(limit=1)
+            except Exception:
+                return False
+        else:
+            raise ValueError("Invalid authcheck method "+method)
+
+        return True
