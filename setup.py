@@ -3,7 +3,7 @@
 #
 #  setup.py
 #
-#  Copyright 2016-2020 fritzctl Contributors
+#  Copyright 2016-2022 fritzctl Contributors
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -66,10 +66,10 @@ setup(name='fritzctl',
         "Operating System :: OS Independent",
 
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
 
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: System",

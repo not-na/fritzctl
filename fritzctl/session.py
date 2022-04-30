@@ -3,7 +3,7 @@
 #
 #  session.py
 #  
-#  Copyright 2016-2020 fritzctl Contributors
+#  Copyright 2016-2022 fritzctl Contributors
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -78,14 +78,17 @@ NAME_TO_URN = {
 """
 Allows for conversion between user-friendly names and internal Service Type URNs.
 
-All service types that could be found in the file ``/tr64desc.xml`` on the 7th of July 2016 with a FRITZ!Box 7580 are supported.
+All service types that could be found in the file ``/tr64desc.xml`` on the 30th of April
+2022 with a FRITZ!Box 7590 are supported.
 
-The naming scheme is quite simple, all AVM specific names begin with ``avm_``\ , all general-purpose names begin with ``general_`` and
-all network-related names begin with ``net_``\ . For ``net_*`` names, there are three sub-categories: ``net_wan_``\ , ``net_lan_`` and ``net_wlan_``\ .
+The naming scheme is quite simple, all AVM specific names begin with ``avm_``\\ , all general-purpose names begin with
+``general_`` and all network-related names begin with ``net_``\\ . For ``net_*`` names,
+there are three sub-categories: ``net_wan_``\\ , ``net_lan_`` and ``net_wlan_``\\ .
 
 .. seealso::
    
-   See the docs for :py:meth:`getAPI() <fritzctl.session.Session.getAPI>` and :py:meth:`getOOAPI() <fritzctl.session.Session.getOOAPI()>` for more information about how to use these names.
+   See the docs for :py:meth:`getAPI() <fritzctl.session.Session.getAPI>`
+   and :py:meth:`getOOAPI() <fritzctl.session.Session.getOOAPI()>` for more information about how to use these names.
 
 Table of Name -> URN mapping:
 
@@ -134,7 +137,8 @@ net_wlan_3rd             ``urn:dslforum-org:service:WLANConfiguration:3``       
 .. |urn_net_lan_ethifcfg| replace:: net_lan_ethernetinterfacecfg
 .. |urn_net_lan_ethifcfg_urn| replace:: ``urn:dslforum-org:service:LANEthernetInterfaceConfig:1``
 
-As you may have noticed, there are three WLANConfiguration URNs, this is because they correspond to the normal wifi, 5ghz wifi and the guest network.
+As you may have noticed, there are three WLANConfiguration URNs, this is because they correspond to the normal wifi,
+5ghz wifi and the guest network.
 
 The first URN always corresponds to the 2.4ghz network, but the second depends on what networks are active.
 If there is an 5ghz network, it will always be the second network and the guest network will be the third network.
@@ -144,6 +148,7 @@ You may be able to make an educated guess about which network is which by queryi
 
 See the :py:mod:`fritzctl.ooapi` package for specific OO APIs, as indicated in the table.
 """
+
 
 class Session(object):
     """
@@ -166,29 +171,28 @@ class Session(object):
     :ivar urns: List of URNs found on the server, can be used for debugging
     """
     def __init__(self,
-                 server=None,
+                 server="fritz.box",
                  user=None, pwd=None,
                  port=49000,
                  authcheck=True,
                  timeout=2.0,
                  authcheck_method="deviceinfo",
                  ):
-        if server is None:
-            raise NotImplementedError("Server search is currently not implemented")
-        else:
-            self.server = server
+        self.server = server
         
         self.user = user if user is not None else ""
         self.pwd = pwd if pwd is not None else ""
         self.timeout = timeout
 
+        # TODO: add SCPD caching
         self.device = simpletr64.DeviceTR64(server, port=port)
         self.device.username = self.user
         self.device.password = self.pwd
 
+        # TODO: auto-upgrade to HTTPS if supported
         self.device.loadDeviceDefinitions("http://"+self.server+":"+str(self.device.port)+"/tr64desc.xml", timeout=timeout)
         self.device.loadSCPD()
-        self.urns = self.device.deviceSCPD.keys()
+        self.urns = list(self.device.deviceSCPD.keys())
 
         if authcheck:
             if not self.do_authcheck(authcheck_method):

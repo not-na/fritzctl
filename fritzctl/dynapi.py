@@ -3,7 +3,7 @@
 #
 #  dynapi.py
 #  
-#  Copyright 2016-2020 fritzctl Contributors>
+#  Copyright 2016-2022 fritzctl Contributors
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -45,12 +45,13 @@ class DynamicAPI(object):
         self.url = self.session.device.getControlURL(self.urn)
         methods = self.session.device.deviceSCPD[self.urn]
 
-        def _apiMethod(self,method):
-            def callAPI(*args,**kwargs):
-                return self.session.execute(self.url,self.urn,method,*args,**kwargs)
+        def _apiMethod(self, method):
+            def callAPI(*args, **kwargs):
+                return self.session.execute(self.url, self.urn, method, *args, **kwargs)
             return callAPI
         for method in methods:
-            setattr(self,method,_apiMethod(self,method))
+            setattr(self, method, _apiMethod(self, method))
+
     def callAPI(self,action,*args,**kwargs):
         """
         Fallback to use if the API action is not a valid Python identifier or was added after the session was initialized.
